@@ -22,7 +22,7 @@ const checkOrderId = (request, response, next) => {
 }
 
 const listeningRequirements = (request, response, next) => {
-    console.log(request.route)
+    console.log(`Requisição recebida pelo método ${request.method}, através da URL localhost/order/`)
 
     next()
 }
@@ -85,11 +85,8 @@ app.get('/order/:id', listeningRequirements, checkOrderId, (request, response) =
 
 app.patch('/order/:id', listeningRequirements, checkOrderId, (request, response) => {
     const index = request.orderIndex
-    const id = request.orderId
 
-    const updatedOrder = orders[index]
-
-    orders[index] = { id, order: updatedOrder.order, clientName: updatedOrder.clientName, price: updatedOrder.price, status: "Pronto" }
+    orders[index].status = "Pronto"
 
     return response.json(orders[index])
 })
