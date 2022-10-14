@@ -53,16 +53,12 @@ app.put('/order/:id', listeningRequirements, checkOrderId, (request, response) =
 
     const { order, clientName, price } = request.body
 
-    if (order !== undefined) {
-        orders[index] = { id, order, clientName: updatedOrder.clientName, price: updatedOrder.price, status: updatedOrder.status }
-    }
-
-    if (clientName !== undefined) {
-        orders[index] = { id, order: updatedOrder.order, clientName, price: updatedOrder.price, status: updatedOrder.status }
-    }
-
-    if (price !== undefined) {
-        orders[index] = { id, order: updatedOrder.order, clientName: updatedOrder.clientName, price, status: updatedOrder.status }
+    orders[index] = { 
+        id, 
+        order: order ? order : updatedOrder.order, 
+        clientName: clientName ? clientName : updatedOrder.clientName, 
+        price: price ? price : updatedOrder.price, 
+        status: updatedOrder.status
     }
 
     return response.json(orders[index])
