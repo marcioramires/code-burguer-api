@@ -1,9 +1,12 @@
 const express = require("express")
-const uuid = require('uuid')
+const uuid = require("uuid")
+const cors = require("cors")
 
-const port = 3000
+const port = 3001
 const app = express()
+
 app.use(express.json())
+app.use(cors())
 
 const orders = []
 
@@ -34,6 +37,8 @@ app.post('/order', listeningRequirements, (request, response) => {
     const finalOrder = { id: uuid.v4(), order, clientName, price, status: "Em preparação" }
 
     orders.push(finalOrder)
+
+    console.log("cadastrado")
 
     return response.status(201).json(finalOrder)
 
